@@ -124,10 +124,47 @@ bool isPaused = false;
     //    NSLog(@"%f", bumpDiff);
     if (bumpDiff > .5) {
         NSLog(@"Bump!");
-        [self sendSong];
+        if (isPaused) {
+            [self requestSong];
+        } else {
+            [self sendSong];
+        }
+        
     }
 }
 
+- (void)requestSong {
+    NSString *urlString = [NSString stringWithFormat:@"https://continuum.firebaseio.com/iphone.json"];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    if (requestError) {
+        NSLog(@"Error! %@", requestError);
+    } else {
+        NSLog(@"Response: %@", urlResponse);
+        NSError *error;
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:response1 options:NSJSONReadingMutableContainers error:&error];
+        if (error) {
+            NSLog(@"JSON Error: %@", error);
+        }
+        NSLog(@"JSON: %@", json);
+        NSNumber *seekNum = [[json objectForKey:@"ping"] objectForKey:@"seek"];
+        NSLog(@"Seek: %@", seekNum);
+        
+        [[MPMusicPlayerController iPodMusicPlayer] play];
+        isPaused = false;
+//        [[[MPNowPlayingInfoCenter defaultCenter] nowPlayingInfo] setValue:seekNum forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
+//        MPMediaItem *nowPlayingMediaItem = [[MPMusicPlayerController iPodMusicPlayer] nowPlayingItem];
+//        NSNumber *duration = [nowPlayingMediaItem valueForProperty:MPMediaItemPropertyPlaybackDuration];
+        [[MPMusicPlayerController iPodMusicPlayer] setCurrentPlaybackTime:[seekNum doubleValue]];
+    }
+}
 
 //- (IBAction)sendButton {
 - (void)sendSong {
@@ -152,20 +189,15 @@ bool isPaused = false;
     NSError *requestError;
     NSURLResponse *urlResponse = nil;
     
-    if (isPaused) {
-        [[MPMusicPlayerController iPodMusicPlayer] play];
-        isPaused = false;
-    } else {
-        [[MPMusicPlayerController iPodMusicPlayer] pause];
-        isPaused = true;
-    }
-    
-    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    if (requestError) {
-        NSLog(@"Error! %@", requestError);
-    } else {
-        NSLog(@"Response: %@", urlResponse);
-    }
+    [[MPMusicPlayerController iPodMusicPlayer] pause];
+    isPaused = true;
+
+//    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+//    if (requestError) {
+//        NSLog(@"Error! %@", requestError);
+//    } else {
+//        NSLog(@"Response: %@", urlResponse);
+//    }
     NSLog(@"Title: %@\nTime: %f\nArtist: %@", title, currTime, artist);
 }
 
