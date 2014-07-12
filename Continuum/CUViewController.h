@@ -11,6 +11,6 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CoreMotion/CoreMotion.h>
 
-@interface CUViewController : UIViewController <CBCentralManagerDelegate>
+@interface CUViewController : UIViewController <CBCentralManagerDelegate, UITextFieldDelegate>
 
 @end

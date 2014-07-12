@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) NSMutableDictionary *w_self;
 
+@property (strong, nonatomic) IBOutlet UITextField *textInputView;
+
 @end
 
 @implementation CUViewController
@@ -30,6 +32,11 @@
 //NSDate *lastBump = NULL;
 //bool isPaused = false;
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:@"username"];
+    [textField resignFirstResponder];
+    return YES;
+}
 
 - (NSMutableDictionary *)w_self {
     if (!_w_self) {
@@ -38,11 +45,22 @@
     return _w_self;
 }
 
+- (void)resignOnTap:(id)iSender {
+    [[self view] endEditing:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     // nil while connected to an accessory
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnTap:)];
+    [singleTap setNumberOfTapsRequired:1];
+    [singleTap setNumberOfTouchesRequired:1];
+    [singleTap setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:singleTap];
+
     
 //    self.mgr = [[CBCentralManager alloc] initWithDelegate:nil queue:nil];
 //    self.motionManager = [[CMMotionManager alloc] init];

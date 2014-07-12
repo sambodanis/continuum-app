@@ -134,6 +134,19 @@ bool isPaused = false;
 }
 
 - (void)requestSong {
+    
+    NSString *urlStringPing = [NSString stringWithFormat:@"http://192.241.169.214:5000/secondping/?status=%d", 1];
+    NSURL *urlPing = [NSURL URLWithString:urlStringPing];
+    NSMutableURLRequest *requestPing = [NSMutableURLRequest requestWithURL:urlPing
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    NSError *requestErrorPing;
+    NSURLResponse *urlResponsePing = nil;
+    
+    NSData *response1Ping = [NSURLConnection sendSynchronousRequest:requestPing returningResponse:&urlResponsePing error:&requestErrorPing];
+
+
+    
     NSString *urlString = [NSString stringWithFormat:@"https://continuum.firebaseio.com/iphone.json"];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
@@ -159,9 +172,7 @@ bool isPaused = false;
         
         [[MPMusicPlayerController iPodMusicPlayer] play];
         isPaused = false;
-//        [[[MPNowPlayingInfoCenter defaultCenter] nowPlayingInfo] setValue:seekNum forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
-//        MPMediaItem *nowPlayingMediaItem = [[MPMusicPlayerController iPodMusicPlayer] nowPlayingItem];
-//        NSNumber *duration = [nowPlayingMediaItem valueForProperty:MPMediaItemPropertyPlaybackDuration];
+
         [[MPMusicPlayerController iPodMusicPlayer] setCurrentPlaybackTime:[seekNum doubleValue]];
     }
 }
@@ -192,12 +203,12 @@ bool isPaused = false;
     [[MPMusicPlayerController iPodMusicPlayer] pause];
     isPaused = true;
 
-//    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-//    if (requestError) {
-//        NSLog(@"Error! %@", requestError);
-//    } else {
-//        NSLog(@"Response: %@", urlResponse);
-//    }
+    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    if (requestError) {
+        NSLog(@"Error! %@", requestError);
+    } else {
+        NSLog(@"Response: %@", urlResponse);
+    }
     NSLog(@"Title: %@\nTime: %f\nArtist: %@", title, currTime, artist);
 }
 
