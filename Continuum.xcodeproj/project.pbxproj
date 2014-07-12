@@ -22,6 +22,8 @@
 		66BC35C1197123B500C30F7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 66BC35BF197123B500C30F7B /* InfoPlist.strings */; };
 		66BC35C3197123B500C30F7B /* ContinuumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66BC35C2197123B500C30F7B /* ContinuumTests.m */; };
 		66BC35CD1971242E00C30F7B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66BC35CC1971242E00C30F7B /* MediaPlayer.framework */; };
+		66BC35CF19714BE700C30F7B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66BC35CE19714BE600C30F7B /* CoreBluetooth.framework */; };
+		66BC35D11971510100C30F7B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66BC35D01971510100C30F7B /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		66BC35C0197123B500C30F7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		66BC35C2197123B500C30F7B /* ContinuumTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContinuumTests.m; sourceTree = "<group>"; };
 		66BC35CC1971242E00C30F7B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		66BC35CE19714BE600C30F7B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		66BC35D01971510100C30F7B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66BC35D11971510100C30F7B /* CoreMotion.framework in Frameworks */,
+				66BC35CF19714BE700C30F7B /* CoreBluetooth.framework in Frameworks */,
 				66BC35CD1971242E00C30F7B /* MediaPlayer.framework in Frameworks */,
 				66BC359A197123B400C30F7B /* CoreGraphics.framework in Frameworks */,
 				66BC359C197123B400C30F7B /* UIKit.framework in Frameworks */,
@@ -104,6 +110,8 @@
 		66BC3596197123B400C30F7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				66BC35D01971510100C30F7B /* CoreMotion.framework */,
+				66BC35CE19714BE600C30F7B /* CoreBluetooth.framework */,
 				66BC35CC1971242E00C30F7B /* MediaPlayer.framework */,
 				66BC3597197123B400C30F7B /* Foundation.framework */,
 				66BC3599197123B400C30F7B /* CoreGraphics.framework */,
@@ -461,6 +469,7 @@
 				66BC35C8197123B500C30F7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		66BC35C9197123B500C30F7B /* Build configuration list for PBXNativeTarget "ContinuumTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +478,7 @@
 				66BC35CB197123B500C30F7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

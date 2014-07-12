@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import <CoreBluetooth/CoreBluetooth.h>
+#import <CoreMotion/CoreMotion.h>
 
-@interface CUViewController : UIViewController
+@interface CUViewController : UIViewController <CBCentralManagerDelegate>
 
 @end
