@@ -212,6 +212,13 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Sam Bodanis";
 				TargetAttributes = {
+					66BC3593197123B400C30F7B = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					66BC35B4197123B500C30F7B = {
 						TestTargetID = 66BC3593197123B400C30F7B;
 					};
